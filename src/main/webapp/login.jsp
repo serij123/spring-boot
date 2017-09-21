@@ -11,8 +11,9 @@ Welcome!
     <label for="username">username:</label><input type="text" id="username" name="username"/><br/>
     <label for="password">Password:</label><input id="password" type="password" name="password"/><br/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <input type="submit" value="Login"/>
+    <input type="submit" value="Sign In"/>
 </form>
+<a href="/signup">Sign Up</a>
 
 </body>
 
