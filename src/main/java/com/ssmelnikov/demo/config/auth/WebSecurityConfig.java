@@ -22,17 +22,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/signup").anonymous()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/resources/**", "/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
+                .defaultSuccessUrl("/home")
                 .loginPage("/login")
                 .permitAll()
                 .and()
             .logout()
+                .logoutUrl("/login?logout")
                 .permitAll()
-                .and()
             ;
         http
             .csrf()
