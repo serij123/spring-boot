@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.Map;
 /**
  * Created by Melnikov_S on 22.09.2017.
  */
-@Controller
+@org.springframework.stereotype.Controller
 public class ChatController {
     @Autowired
     private ChatRepository chatRepo;

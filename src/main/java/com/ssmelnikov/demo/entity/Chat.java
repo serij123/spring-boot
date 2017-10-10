@@ -1,7 +1,8 @@
 package com.ssmelnikov.demo.entity;
 
+import org.bson.Document;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by Melnikov_S on 22.09.2017.
  */
-@Document
+@org.springframework.data.mongodb.core.mapping.Document
 public class Chat {
     @Id
     private String id;
@@ -17,7 +18,6 @@ public class Chat {
     private String createdBy;
     private String name;
     private Date createDate;
-    private List<Message> messages;
 
     public String getId() {
         return id;
@@ -41,14 +41,6 @@ public class Chat {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 
     public String getCreatedBy() {

@@ -14,6 +14,14 @@ public class Message {
     private Date dt;
     private String user;
     private String text;
+    private String chtld;
+
+    public void setChtld(String chtld) {
+        this.chtld = chtld;
+    }
+
+    public String getChtld() { return chtld; }
+
 
     public String getId() {
         return id;
