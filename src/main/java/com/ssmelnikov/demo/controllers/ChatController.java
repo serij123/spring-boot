@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * Created by Melnikov_S on 22.09.2017.
  */
-@org.springframework.stereotype.Controller
+@Controller
 public class ChatController {
     @Autowired
     private ChatRepository chatRepo;
@@ -56,12 +56,12 @@ public class ChatController {
         message.setUser(userDetails.getUser().getLogin());
 
         Chat chat = chatRepo.findOne(chatId);
-        List<Message> messages = chat.getMessages();
-        if(messages == null) {
-            messages = new ArrayList<>(1);
+        List<Message> findByChatld = chat.getChatld();
+        if(findByChatld == null) {
+            findByChatld = new ArrayList<>(1);
         }
-        messages.add(message);
-        chat.setMessages(messages);
+        findByChatld.add(message);
+        chat.setgetChatld(findByChatld);
         chatRepo.save(chat);
         return "redirect:/view_chat?chat_id=" + chat.getId();
     }
