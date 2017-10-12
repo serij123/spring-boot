@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MessegeRepository extends MongoRepository<Message, String> {
+public interface MessageRepository extends MongoRepository<Message, String> {
    List <Message> findByChatld(String chatld);
 
 }

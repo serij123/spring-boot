@@ -2,10 +2,9 @@ package com.ssmelnikov.demo.controllers;
 
 import com.ssmelnikov.demo.entity.Chat;
 import com.ssmelnikov.demo.entity.Message;
-import com.ssmelnikov.demo.entity.User;
 import com.ssmelnikov.demo.items.UserSecDetails;
 import com.ssmelnikov.demo.repo.ChatRepository;
-import com.ssmelnikov.demo.repo.UserRepository;
+import com.ssmelnikov.demo.repo.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +24,8 @@ import java.util.Map;
 public class ChatController {
     @Autowired
     private ChatRepository chatRepo;
+    @Autowired
+    private MessageRepository messageRepo;
 
     @RequestMapping(value = "/create_new_chat", method = RequestMethod.POST)
     public String postCreateNewChat(@ModelAttribute("chat") Chat chat, @AuthenticationPrincipal UserSecDetails userDetails) {
@@ -51,18 +50,11 @@ public class ChatController {
     }
 
     @RequestMapping(value = "/post_message", method = RequestMethod.POST)
-    public String postMessage(@ModelAttribute("newMessage") Message message, @RequestParam("chat_id") String chatId, @AuthenticationPrincipal UserSecDetails userDetails) {
+    public void postMessage(@ModelAttribute("newMessage") Message message, @RequestParam("chat_id") String chatId, @AuthenticationPrincipal UserSecDetails userDetails) {
         message.setDt(new Date());
         message.setUser(userDetails.getUser().getLogin());
 
-        Chat chat = chatRepo.findOne(chatId);
-        List<Message> findByChatld = chat.getChatld();
-        if(findByChatld == null) {
-            findByChatld = new ArrayList<>(1);
-        }
-        findByChatld.add(message);
-        chat.setgetChatld(findByChatld);
-        chatRepo.save(chat);
-        return "redirect:/view_chat?chat_id=" + chat.getId();
+        message.setChatld(chatId);
+        messageRepo.save(message);
     }
 }
