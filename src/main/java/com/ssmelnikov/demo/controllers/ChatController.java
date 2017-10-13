@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,17 +45,21 @@ public class ChatController {
     @RequestMapping(value = "/view_chat", method = RequestMethod.GET)
     public String getViewChat(Map<String, Object> model, @RequestParam("chat_id") String id) {
         Chat chat = chatRepo.findOne(id);
+        List<Message> messages = messageRepo.findByChatld(id);
+
         model.put("newMessage", new Message());
+        model.put("messages", messages);
         model.put("chat", chat);
         return "view_chat";
     }
 
     @RequestMapping(value = "/post_message", method = RequestMethod.POST)
-    public void postMessage(@ModelAttribute("newMessage") Message message, @RequestParam("chat_id") String chatId, @AuthenticationPrincipal UserSecDetails userDetails) {
+    public String postMessage(@ModelAttribute("newMessage") Message message, @RequestParam("chat_id") String chatId, @AuthenticationPrincipal UserSecDetails userDetails) {
         message.setDt(new Date());
         message.setUser(userDetails.getUser().getLogin());
 
         message.setChatld(chatId);
         messageRepo.save(message);
+        return "redirect:/view_chat?chat_id=" + chatId;
     }
 }
