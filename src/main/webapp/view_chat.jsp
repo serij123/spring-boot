@@ -13,7 +13,7 @@
 
 <p>
 <table id="messages">
-    <c:forEach items="${chat.messages}" var="message">
+    <c:forEach items="${messages}" var="message">
         <tr>
             <td>${message.dt}</td>
             <td>${message.user}</td>

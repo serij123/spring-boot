@@ -23,7 +23,11 @@ public class HomeController {
     @RequestMapping("/home")
     public String getHome(Map<String, Object> model, @AuthenticationPrincipal UserSecDetails userDetails) {
         model.put("user", userDetails.getUser());
-        model.put("chats", chatRepo.findAll());
+        try {
+            model.put("chats", chatRepo.findAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "home";
     }
 }
