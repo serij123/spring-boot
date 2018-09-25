@@ -31,6 +31,5 @@ dependencies {
 	compile('javax.servlet:jstl')
 	compile('org.springframework.boot:spring-boot-starter-tomcat')
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb ')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
